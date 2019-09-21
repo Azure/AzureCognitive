@@ -1,0 +1,9 @@
+^misc$
+^\.vs$
+\.sln$
+\.Rproj$
+\.Rxproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+azure-pipelines.yml
+SECURITY.md
