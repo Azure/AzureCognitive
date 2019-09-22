@@ -1,3 +1,26 @@
+#' Object representing an Azure Cognitive Service endpoint
+#'
+#' @param url The URL of the endpoint.
+#' @param type What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.
+#' @param key The key to use to authenticate with the endpoint.
+#' @param aad_token. An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.
+#' @param cognitive_token A Cognitive Service token, as another alternative to a key for the services that accept it.
+#' @details
+#' Currently, `cognitive_endpoint` recognises the following types (or kinds) of services:
+#' - `ComputerVision`: generic computer vision service
+#' - `Face`: face recognition
+#' - `LUIS`: natural language understanding
+#' - `CustomVision.Training`: Training endpoint for a custom vision service
+#' - `CustomVision.Prediction`: Prediction endpoint for a custom vision service
+#' - `ContentModerator`: Content moderation (text and images)
+#' - `Text`: text analytics
+#'
+#' @return
+#' An object inheriting from class `cognitive_endpoint`, that can be used to communicate with the REST endpoint. The object will have a subclass based on the type of service provided.
+#'
+#' @seealso
+#' [call_cognitive_endpoint], [create_cognitive_service], [get_cognitive_service]
+#' @export
 cognitive_endpoint <- function(url, type, key=NULL, aad_token=NULL, cognitive_token=NULL)
 {
     type <- normalize_cognitive_type(type)
@@ -11,6 +34,25 @@ cognitive_endpoint <- function(url, type, key=NULL, aad_token=NULL, cognitive_to
 }
 
 
+#' Call a Cognitive Service REST endpoint
+#'
+#' @param endpoint An object of class `cognitive_endpoint`.
+#' @param operation The operation to perform.
+#' @param options Any query parameters that the operation takes.
+#' @param headers Any optional HTTP headers to include in the REST call. Note that `call_cognitive_endpoint` will handle authentication details automatically, so don't include them here.
+#' @param body The body of the HTTP request for the REST call.
+#' @param encode The encoding (really content-type) for the body. Can be `json` if the body is JSON text, or `raw` for a binary object.
+#' @param http_verb The HTTP verb for the REST call.
+#' @param http_status_handler How to handle a failed REST call. `stop`, `warn` and `message` will call the corresponding `*_for_status` handler in the httr package; `pass` will return the raw response object unchanged. The last one is mostly intended for debugging purposes.
+#' @details
+#' This function does the low-level work of constructing a HTTP request and then calling the REST endpoint. It is meant to be used by other packages that provide higher-level views of the service functionality.
+#'
+#' @return
+#' For a successful REST call, the contents of the response. This will usually be a list, obtained by translating the raw JSON body into R. If the call returns a non-success HTTP status code, based on the `http_status_handler` argument.
+#'
+#' @seealso
+#' [cognitive_endpoint], [create_cognitive_service], [get_cognitive_service]
+#' @export
 call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers=list(), body=NULL, encode="json",
                                     http_verb=c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
                                     http_status_handler=c("stop", "warn", "message", "pass"))
@@ -113,5 +155,5 @@ get_api_path <- function(type)
 
 normalize_cognitive_type <- function(type)
 {
-    tolower(gsub("\\.", "_", type))
+    tolower(gsub("[. ]", "_", type))
 }
