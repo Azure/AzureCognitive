@@ -34,7 +34,7 @@ endp <- cognitive_endpoint("https://myvisionservice.cognitiveservices.azure.com/
     service_type="ComputerVision", key="key")
 
 # analyze an image
-img_link <- "http://news.microsoft.com/uploads/2014/09/billg1_print.jpg"
+img_link <- "https://news.microsoft.com/uploads/2014/09/billg1_print.jpg"
 call_cognitive_endpoint(endp,
     operation="analyze",
     body=list(url=img_link),
