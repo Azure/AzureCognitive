@@ -36,20 +36,19 @@ steps:
     Rscript -e "f <- pkgbuild::build(dest_path='$(Build.ArtifactStagingDirectory)'); rcmdcheck::rcmdcheck(f, args='--no-manual', error_on='warning', check_dir='check')"
   displayName: 'Checking package'
 
-# - bash: |
-#     export PKGBUILD_GZ=$(ls $(Build.ArtifactStagingDirectory)/*.gz)
-#     mkdir drat
-#     cd drat
-#     git init
-#     git config user.email "dummy@example.com"
-#     git config user.name "Azure Pipelines"
-#     git remote add upstream "https://$(ghPat)@github.com/cloudyr/cloudyr.github.io.git"
-#     git fetch upstream
-#     git checkout master
-#     Rscript -e "drat::insertPackage('$PKGBUILD_GZ', repodir='./drat')"
-#     git add --all
-#     git commit -m "add $PKGBUILD_GZ (build $(Build.BuildId))"
-#     git push
-#   displayName: 'Update Cloudyr drat'
-#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  
+- bash: |
+    export PKGBUILD_GZ=$(ls $(Build.ArtifactStagingDirectory)/*.gz)
+    mkdir drat
+    cd drat
+    git init
+    git config user.email "dummy@example.com"
+    git config user.name "Azure Pipelines"
+    git remote add upstream "https://$(ghPat)@github.com/cloudyr/cloudyr.github.io.git"
+    git fetch upstream
+    git checkout master
+    Rscript -e "drat::insertPackage('$PKGBUILD_GZ', repodir='./drat')"
+    git add --all
+    git commit -m "add $PKGBUILD_GZ (build $(Build.BuildId))"
+    git push
+  displayName: 'Update Cloudyr drat'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
