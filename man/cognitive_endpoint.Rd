@@ -34,6 +34,7 @@ Currently, \code{cognitive_endpoint} recognises the following service types:
 \item \code{CustomVision.Prediction}: Prediction endpoint for a custom vision service
 \item \code{ContentModerator}: Content moderation (text and images)
 \item \code{Text}: text analytics
+\item \code{TextTranslate}: text translation
 }
 }
 \seealso{

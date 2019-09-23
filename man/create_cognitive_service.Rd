@@ -43,6 +43,7 @@ For \code{create_cognitive_service}, the type of service created can be one of t
 \item \code{CustomVision.Prediction}: Prediction endpoint for a custom vision service
 \item \code{ContentModerator}: Content moderation (text and images)
 \item \code{Text}: text analytics
+\item \code{TextTranslate}: text translation
 }
 
 The possible tiers depend on the type of service created. Consult the Azure Cognitive Service documentation for more information. Usually there will be at least one free tier available.

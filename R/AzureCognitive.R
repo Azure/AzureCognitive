@@ -44,6 +44,7 @@ globalVariables(c("self", "private"))
 #' - `CustomVision.Prediction`: Prediction endpoint for a custom vision service
 #' - `ContentModerator`: Content moderation (text and images)
 #' - `Text`: text analytics
+#' - `TextTranslate`: text translation
 #'
 #' The possible tiers depend on the type of service created. Consult the Azure Cognitive Service documentation for more information. Usually there will be at least one free tier available.
 #'

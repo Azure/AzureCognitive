@@ -14,6 +14,7 @@
 #' - `CustomVision.Prediction`: Prediction endpoint for a custom vision service
 #' - `ContentModerator`: Content moderation (text and images)
 #' - `Text`: text analytics
+#' - `TextTranslate`: text translation
 #'
 #' @return
 #' An object inheriting from class `cognitive_endpoint`, that can be used to communicate with the REST endpoint. The object will have a subclass based on the type of the service.
@@ -158,6 +159,7 @@ get_api_path <- function(type)
         customvision=, customvision_training=, customvision_prediction="customvision/v3.0",
         contentmoderator="contentmoderator/moderate/v1.0",
         text="text/analytics/v2.0",
+        texttranslate="translate",
         stop("Unknown cognitive service", call.=FALSE)
     )
 }
