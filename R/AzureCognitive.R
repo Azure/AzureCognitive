@@ -9,10 +9,58 @@ globalVariables(c("self", "private"))
 }
 
 
+#' Create, retrieve or delete an Azure Cognitive Service
+#'
+#' Methods for the [AzureRMR::az_resource_group] class.
+#'
+#' @rdname create_cognitive_service
+#' @name create_cognitive_service
+#' @aliases create_cognitive_service get_cognitive_service delete_cognitive_service
+#' @section Usage:
+#' ```
+#' create_cognitive_service(name, service_type, service_tier, location = self$location,
+#'                          subdomain = name, properties = list(), ...)
+#' get_cognitive_service(name)
+#' delete_cognitive_service(name, confirm = TRUE, wait = FALSE)
+#' ```
+#' @section Arguments:
+#' - `name`: The name for the cognitive service resource.
+#' - `service_type`: The type of service (or "kind") to create. See 'Details' below.
+#' - `service_tier`: The pricing tier (SKU) for the service.
+#' - `location`: The Azure location in which to create the service. Defaults to the resource group's location.
+#' - `subdomain`: The subdomain name to assign to the service; defaults to the resource name. Set this to NULL if you don't want to assign the service a subdomain of its own.
+#' - `properties`: For `create_cognitive_service`, an optional named list of other properties for the service.
+#' - `confirm`: For `delete_cognitive_service`, whether to prompt for confirmation before deleting the resource.
+#' - `wait`: For `delete_cognitive_service`, whether to wait until the deletion is complete before returning.
+#'
+#' @section Details:
+#' These are methods to create, get or delete a cognitive service resource within a resource group.
+#'
+#' For `create_cognitive_service`, the type of service created can be one of the following:
+#' - `ComputerVision`: generic computer vision service
+#' - `Face`: face recognition
+#' - `LUIS`: language understanding
+#' - `CustomVision.Training`: Training endpoint for a custom vision service
+#' - `CustomVision.Prediction`: Prediction endpoint for a custom vision service
+#' - `ContentModerator`: Content moderation (text and images)
+#' - `Text`: text analytics
+#'
+#' The possible tiers depend on the type of service created. Consult the Azure Cognitive Service documentation for more information. Usually there will be at least one free tier available.
+#'
+#' @section Value:
+#' For `create_cognitive_service` and `get_cognitive_service`, an object of class `az_cognitive_service`.
+#'
+#' @seealso
+#' [cognitive_endpoint], [call_cognitive_endpoint]
+#'
+#' [Azure Cognitive Services documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/),
+#' [REST API reference](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/)
+NULL
+
 add_methods <- function()
 {
     az_resource_group$set("public", "create_cognitive_service", overwrite=TRUE,
-    function(name, location=self$location, subdomain=name, kind="ComputerVision", sku="S1", properties=list(), ...)
+    function(name, service_type, service_tier, location=self$location, subdomain=name, properties=list(), ...)
     {
         if(!is.null(subdomain))
             properties <- utils::modifyList(properties, list(customSubDomainName=subdomain))
@@ -21,8 +69,8 @@ add_methods <- function()
             type="Microsoft.CognitiveServices/accounts",
             name=name,
             location=location,
-            kind="ComputerVision",
-            sku=list(name=sku),
+            kind=service_type,
+            sku=list(name=service_tier),
             properties=properties,
             ...)
     })

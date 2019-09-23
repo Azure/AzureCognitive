@@ -1,36 +1,46 @@
 #' Object representing an Azure Cognitive Service endpoint
 #'
 #' @param url The URL of the endpoint.
-#' @param type What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.
+#' @param service_type What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.
 #' @param key The key to use to authenticate with the endpoint.
 #' @param aad_token. An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.
 #' @param cognitive_token A Cognitive Service token, as another alternative to a key for the services that accept it.
 #' @details
-#' Currently, `cognitive_endpoint` recognises the following types (or kinds) of services:
+#' Currently, `cognitive_endpoint` recognises the following service types:
 #' - `ComputerVision`: generic computer vision service
 #' - `Face`: face recognition
-#' - `LUIS`: natural language understanding
+#' - `LUIS`: language understanding
 #' - `CustomVision.Training`: Training endpoint for a custom vision service
 #' - `CustomVision.Prediction`: Prediction endpoint for a custom vision service
 #' - `ContentModerator`: Content moderation (text and images)
 #' - `Text`: text analytics
 #'
 #' @return
-#' An object inheriting from class `cognitive_endpoint`, that can be used to communicate with the REST endpoint. The object will have a subclass based on the type of service provided.
+#' An object inheriting from class `cognitive_endpoint`, that can be used to communicate with the REST endpoint. The object will have a subclass based on the type of the service.
 #'
 #' @seealso
 #' [call_cognitive_endpoint], [create_cognitive_service], [get_cognitive_service]
 #' @export
-cognitive_endpoint <- function(url, type, key=NULL, aad_token=NULL, cognitive_token=NULL)
+cognitive_endpoint <- function(url, service_type, key=NULL, aad_token=NULL, cognitive_token=NULL)
 {
-    type <- normalize_cognitive_type(type)
+    service_type <- normalize_cognitive_type(service_type)
     url <- httr::parse_url(url)
-    url$path <- get_api_path(type)
+    url$path <- get_api_path(service_type)
 
     object <- list(url=url, key=key, aad_token=aad_token, cognitive_token=cognitive_token)
-    class(object) <- c(paste0(type, "_endpoint"), "cognitive_endpoint")
+    class(object) <- c(paste0(service_type, "_endpoint"), "cognitive_endpoint")
 
     object
+}
+
+
+#' @export
+print.cognitive_endpoint <- function(x, ...)
+{
+    cat("Azure Cognitive Service endpoint\n")
+    cat("Service type:", sub("_.*$", "", class(x)[1]), "\n")
+    cat("Endpoint URL:", httr::build_url(x$url), "\n")
+    invisible(x)
 }
 
 

@@ -4,13 +4,13 @@
 \alias{cognitive_endpoint}
 \title{Object representing an Azure Cognitive Service endpoint}
 \usage{
-cognitive_endpoint(url, type, key = NULL, aad_token = NULL,
+cognitive_endpoint(url, service_type, key = NULL, aad_token = NULL,
   cognitive_token = NULL)
 }
 \arguments{
 \item{url}{The URL of the endpoint.}
 
-\item{type}{What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.}
+\item{service_type}{What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.}
 
 \item{key}{The key to use to authenticate with the endpoint.}
 
@@ -19,17 +19,17 @@ cognitive_endpoint(url, type, key = NULL, aad_token = NULL,
 \item{aad_token.}{An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.}
 }
 \value{
-An object inheriting from class \code{cognitive_endpoint}, that can be used to communicate with the REST endpoint. The object will have a subclass based on the type of service provided.
+An object inheriting from class \code{cognitive_endpoint}, that can be used to communicate with the REST endpoint. The object will have a subclass based on the type of the service.
 }
 \description{
 Object representing an Azure Cognitive Service endpoint
 }
 \details{
-Currently, \code{cognitive_endpoint} recognises the following types (or kinds) of services:
+Currently, \code{cognitive_endpoint} recognises the following service types:
 \itemize{
 \item \code{ComputerVision}: generic computer vision service
 \item \code{Face}: face recognition
-\item \code{LUIS}: natural language understanding
+\item \code{LUIS}: language understanding
 \item \code{CustomVision.Training}: Training endpoint for a custom vision service
 \item \code{CustomVision.Prediction}: Prediction endpoint for a custom vision service
 \item \code{ContentModerator}: Content moderation (text and images)
