@@ -14,9 +14,9 @@ cognitive_endpoint(url, service_type, key = NULL, aad_token = NULL,
 
 \item{key}{The key to use to authenticate with the endpoint.}
 
-\item{cognitive_token}{A Cognitive Service token, as another alternative to a key for the services that accept it.}
+\item{aad_token}{An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.}
 
-\item{aad_token.}{An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.}
+\item{cognitive_token}{A Cognitive Service token, as another alternative to a key for the services that accept it.}
 }
 \value{
 An object inheriting from class \code{cognitive_endpoint}, that can be used to communicate with the REST endpoint. The object will have a subclass based on the type of the service.

@@ -3,7 +3,7 @@
 #' @param url The URL of the endpoint.
 #' @param service_type What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.
 #' @param key The key to use to authenticate with the endpoint.
-#' @param aad_token. An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.
+#' @param aad_token An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.
 #' @param cognitive_token A Cognitive Service token, as another alternative to a key for the services that accept it.
 #' @details
 #' Currently, `cognitive_endpoint` recognises the following service types:
@@ -92,7 +92,7 @@ add_cognitive_auth <- function(endpoint, headers)
 {
     headers <- if(!is.null(endpoint$key))
         c(headers, `Ocp-Apim-Subscription-Key`=unname(endpoint$key))
-    else if(is_azure_auth(endpoint$aad_token))
+    else if(is_azure_token(endpoint$aad_token))
     {
         token <- endpoint$aad_token
         if(!token$validate())
