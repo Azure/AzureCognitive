@@ -15,6 +15,7 @@ rg <- sub$get_resource_group("rgname")
 rg$create_cognitive_service("myvisionservice",
     service_type="ComputerVision", service_tier="S1")
 
+# retrieve it
 cogsvc <- rg$get_cognitive_service("myvisionservice")
 
 # list subscription keys
@@ -23,13 +24,13 @@ cogsvc$list_keys()
 
 ## Client interface
 
-AzureCognitive implements basic functionality for communicating with a cognitive service endpoint. It is meant to be used by other packages to support specific services, like Computer Vision, LUIS (language understanding), etc.
+AzureCognitive implements basic functionality for communicating with a cognitive service endpoint. While it can be called by the end-user, it is meant to provide a foundation for other packages that will support specific services, like Computer Vision, LUIS (language understanding), etc.
 
 ```r
 # getting the endpoint from the resource object
 endp <- cogsvc$get_endpoint()
 
-# or standalone (must provide subscription key)
+# or standalone (must provide subscription key or other means of authentication)
 endp <- cognitive_endpoint("https://myvisionservice.cognitiveservices.azure.com/",
     service_type="ComputerVision", key="key")
 
@@ -40,4 +41,23 @@ call_cognitive_endpoint(endp,
     body=list(url=img_link),
     options=list(details="celebrities"),
     http_verb="POST")
+```
+
+```
+$categories
+$categories[[1]]
+$categories[[1]]$name
+[1] "people_"
+
+$categories[[1]]$score
+[1] 0.953125
+
+$categories[[1]]$detail
+$categories[[1]]$detail$celebrities
+$categories[[1]]$detail$celebrities[[1]]
+$categories[[1]]$detail$celebrities[[1]]$name
+[1] "Bill Gates"
+
+$categories[[1]]$detail$celebrities[[1]]$confidence
+[1] 0.9999552
 ```
