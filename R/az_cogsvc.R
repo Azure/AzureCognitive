@@ -14,10 +14,26 @@
 #' Initializing a new object of this class can either retrieve an existing service, or create a new service on the host. Generally, the best way to initialize an object is via the `get_cognitive_service` and `create_cognitive_service` methods of the [az_resource_group] class, which handle the details automatically.
 #'
 #' @section Endpoints:
-#' The client-side interaction with a cognitive service is via an _endpoint_. Endpoint interaction in AzureCognitive is implemented using S3 classes. You can create a new endpoint object via the `get_endpoint()` method, or with the standalone `cognitive_endpoint()` function. If you use the latter, you will also have to supply any necessary authentication credentials, eg a shared key or token.
+#' The client-side interaction with a cognitive service is via an _endpoint_. Endpoint interaction in AzureCognitive is implemented using S3 classes. You can create a new endpoint object via the `get_endpoint()` method, or with the standalone `cognitive_endpoint()` function. If you use the latter, you will also have to supply any necessary authentication credentials, eg a subscription key or token.
 #'
 #' @seealso
 #' [cognitive_endpoint], [create_cognitive_service], [get_cognitive_service]
+#' @examples
+#' \dontrun{
+#'
+#' # recommended way of creating a new resource: via resource group method
+#' rg <- AzureRMR::get_azure_login()$
+#'     get_subscription("sub_id")$
+#'     get_resource_group("rgname")
+#' cogsvc <- rg$create_cognitive_service("myvisionservice",
+#'     service_type="ComputerVision", service_tier="F0")
+#'
+#' cogsvc$list_service_tiers()
+#' cogsvc$list_keys()
+#' cogsvc$regen_key()
+#' cogsvc$get_endpoint()
+#'
+#' }
 #' @export
 az_cognitive_service <- R6::R6Class("az_cognitive_service", inherit=AzureRMR::az_resource,
 

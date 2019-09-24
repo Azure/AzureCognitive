@@ -54,6 +54,25 @@ The possible tiers depend on the type of service created. Consult the Azure Cogn
 For \code{create_cognitive_service} and \code{get_cognitive_service}, an object of class \code{az_cognitive_service}.
 }
 
+\examples{
+\dontrun{
+
+rg <- AzureRMR::get_azure_login()$
+    get_subscription("sub_id")$
+    get_resource_group("rgname")
+
+rg$create_cognitive_service("myvisionservice",
+    service_type="ComputerVision", service_tier="F0")
+
+rg$create_cognitive_service("mylangservice",
+    service_type="LUIS", service_tier="F0")
+
+rg$get_cognitive_service("myvisionservice")
+
+rg$delete_cognitive_service("myvisionservice")
+
+}
+}
 \seealso{
 \link{cognitive_endpoint}, \link{call_cognitive_endpoint}
 

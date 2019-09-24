@@ -19,7 +19,7 @@ cognitive_endpoint(url, service_type, key = NULL, aad_token = NULL,
 \item{cognitive_token}{A Cognitive Service token, as another alternative to a key for the services that accept it.}
 }
 \value{
-An object inheriting from class \code{cognitive_endpoint}, that can be used to communicate with the REST endpoint. The object will have a subclass based on the type of the service.
+An object of from class \code{cognitive_endpoint}, that can be used to communicate with the REST endpoint.
 }
 \description{
 Object representing an Azure Cognitive Service endpoint
@@ -35,6 +35,23 @@ Currently, \code{cognitive_endpoint} recognises the following service types:
 \item \code{ContentModerator}: Content moderation (text and images)
 \item \code{Text}: text analytics
 \item \code{TextTranslate}: text translation
+}
+}
+\examples{
+\dontrun{
+
+cognitive_service("https://myvisionservice.api.cognitive.azure.com",
+    service_type="Computervision", key="key")
+
+cognitive_service("https://mylangservice.api.cognitive.azure.com",
+    service_type="LUIS", key="key")
+
+# authenticating with AAD
+token <- AzureAuth::get_azure_token("https://cognitiveservices.azure.com",
+    tenant="mytenant", app="app_id", password="password")
+cognitive_service("https://myvisionservice.api.cognitive.azure.com",
+    service_type="Computervision", aad_token=token))
+
 }
 }
 \seealso{

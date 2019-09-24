@@ -20,7 +20,7 @@ call_cognitive_endpoint(endpoint, operation, options = list(),
 
 \item{body}{The body of the HTTP request for the REST call.}
 
-\item{encode}{The encoding (really content-type) for the body. Can be \code{json} if the body is JSON text, or \code{raw} for a binary object.}
+\item{encode}{The encoding (really content-type) for the body. Can be \code{json} if the body is JSON text, or \code{raw} for a binary object. If \code{encode == "raw"}, you must also set the content-type header manually (see examples below).}
 
 \item{http_verb}{The HTTP verb for the REST call.}
 
@@ -34,6 +34,31 @@ Call a Cognitive Service REST endpoint
 }
 \details{
 This function does the low-level work of constructing a HTTP request and then calling the REST endpoint. It is meant to be used by other packages that provide higher-level views of the service functionality.
+}
+\examples{
+\dontrun{
+
+endp <- cognitive_service("https://myvisionservice.api.cognitive.azure.com",
+    service_type="Computervision", key="key")
+
+# analyze an online image
+img_link <- "https://news.microsoft.com/uploads/2014/09/billg1_print.jpg"
+call_cognitive_endpoint(endp,
+    operation="analyze",
+    body=list(url=img_link),
+    options=list(details="celebrities"),
+    http_verb="POST")
+
+# analyze an image on the local machine
+img_raw <- readBin("image.jpg", "raw", file.info("image.jpg")$size)
+call_cognitive_endpoint(endp,
+    operation="analyze",
+    body=img_raw,
+    encode="raw",
+    headers=list(`content-type`="application/octet-stream"),
+    http_verb="POST")
+
+}
 }
 \seealso{
 \link{cognitive_endpoint}, \link{create_cognitive_service}, \link{get_cognitive_service}

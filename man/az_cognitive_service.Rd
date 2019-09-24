@@ -16,9 +16,9 @@ Class representing a cognitive service resource, exposing methods for working wi
 The following methods are available, in addition to those provided by the \link[AzureRMR:az_resource]{AzureRMR::az_resource} class:
 \itemize{
 \item \code{list_keys()}: Return the access keys for this service.
-\item \code{get_endpoint(key)}: Return the service endpoint, along with an access key. See 'Endpoints' below.
+\item \code{get_endpoint()}: Return the service endpoint, along with an access key. See 'Endpoints' below.
 \item \code{regen_key(key)}: Regenerates (creates a new value for) an access key. The argument \code{key} can be 1 or 2.
-\item \code{list_skus()}: List the SKUs (pricing tiers) available for this service.
+\item \code{list_service_tiers()}: List the service pricing tiers (SKUs) available for this service.
 }
 }
 
@@ -29,9 +29,26 @@ Initializing a new object of this class can either retrieve an existing service,
 
 \section{Endpoints}{
 
-The client-side interaction with a cognitive service is via an \emph{endpoint}. Endpoint interaction in AzureCognitive is implemented using S3 classes. You can create a new endpoint object via the \code{get_endpoint()} method, or with the standalone \code{cognitive_endpoint()} function. If you use the latter, you will also have to supply any necessary authentication credentials, eg a shared key or token.
+The client-side interaction with a cognitive service is via an \emph{endpoint}. Endpoint interaction in AzureCognitive is implemented using S3 classes. You can create a new endpoint object via the \code{get_endpoint()} method, or with the standalone \code{cognitive_endpoint()} function. If you use the latter, you will also have to supply any necessary authentication credentials, eg a subscription key or token.
 }
 
+\examples{
+\dontrun{
+
+# recommended way of creating a new resource: via resource group method
+rg <- AzureRMR::get_azure_login()$
+    get_subscription("sub_id")$
+    get_resource_group("rgname")
+cogsvc <- rg$create_cognitive_service("myvisionservice",
+    service_type="ComputerVision", service_tier="F0")
+
+cogsvc$list_service_tiers()
+cogsvc$list_keys()
+cogsvc$regen_key()
+cogsvc$get_endpoint()
+
+}
+}
 \seealso{
 \link{cognitive_endpoint}, \link{create_cognitive_service}, \link{get_cognitive_service}
 }

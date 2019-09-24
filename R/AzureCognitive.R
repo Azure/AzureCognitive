@@ -56,6 +56,24 @@ globalVariables(c("self", "private"))
 #'
 #' [Azure Cognitive Services documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/),
 #' [REST API reference](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/)
+#' @examples
+#' \dontrun{
+#'
+#' rg <- AzureRMR::get_azure_login()$
+#'     get_subscription("sub_id")$
+#'     get_resource_group("rgname")
+#'
+#' rg$create_cognitive_service("myvisionservice",
+#'     service_type="ComputerVision", service_tier="F0")
+#'
+#' rg$create_cognitive_service("mylangservice",
+#'     service_type="LUIS", service_tier="F0")
+#'
+#' rg$get_cognitive_service("myvisionservice")
+#'
+#' rg$delete_cognitive_service("myvisionservice")
+#'
+#'}
 NULL
 
 add_methods <- function()
