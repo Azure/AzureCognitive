@@ -2,6 +2,8 @@
 
 A package to work with [Azure Cognitive Services](https://azure.microsoft.com/services/cognitive-services/). Both a Resource Manager interface and a client interface to the REST API are provided.
 
+The primary repo for this package is at https://github.com/Azure/AzureCognitive; please submit issues and PRs there. It is also mirrored at the Cloudyr org at https://github.com/cloudyr/AzureCognitive. You can install the development version of the package with `devtools::install_github("Azure/AzureCognitive")`.
+
 ## Resource Manager interface
 
 AzureCognitive extends the class framework provided by [AzureRMR](https://github.com/Azure/AzureRMR) to support Cognitive Services. You can create, retrieve, update, and delete cognitive service resources by calling the corresponding methods for a resource group.

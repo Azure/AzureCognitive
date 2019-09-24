@@ -183,14 +183,6 @@ cognitive_error_message <- function(cont)
 }
 
 
-# kind - api
-# ComputerVision - vision/v2.0
-# Face - face/v1.0
-# LUIS - luis/v2.0
-# CustomVision.Training - customvision/v3.0
-# CustomVision.Prediction - customvision/v3.0
-# ContentModerator - contentmoderator/moderate/v1.0
-# Text - text/analytics/v2.0
 get_api_path <- function(type)
 {
     switch(type,

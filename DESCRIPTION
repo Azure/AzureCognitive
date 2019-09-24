@@ -1,6 +1,6 @@
 Package: AzureCognitive
 Title: Interface to Azure Cognitive Services
-Version: 0.1
+Version: 0.1.0
 Authors@R: c(
     person("Hong", "Ooi", , "hongooi@microsoft.com", role = c("aut", "cre")),
     person("Microsoft", role="cph")
@@ -17,6 +17,8 @@ Imports:
     jsonlite,
     httr (>= 1.3),
 Suggests:
+    knitr,
     testthat
+VignetteBuilder: knitr
 Roxygen: list(markdown=TRUE)
 RoxygenNote: 6.1.1
