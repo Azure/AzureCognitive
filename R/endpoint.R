@@ -44,7 +44,7 @@ cognitive_endpoint <- function(url, service_type, key=NULL, aad_token=NULL, cogn
     url <- httr::parse_url(url)
     url$path <- get_api_path(service_type)
 
-    object <- list(url=url, key=key, aad_token=aad_token, cognitive_token=cognitive_token)
+    object <- list(url=url, key=unname(key), aad_token=aad_token, cognitive_token=cognitive_token)
     class(object) <- "cognitive_endpoint"
 
     object
@@ -116,9 +116,11 @@ call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers
         # manually convert to json to avoid issues with nulls
         body <- jsonlite::toJSON(body, auto_unbox=TRUE, digits=22, null="null")
         encode <- "raw"
+        headers$`content-type` <- "application/json"
     }
     else if(encode == "raw")
         headers$`content-type` <- "application/octet-stream"
+    else stop("Unsupported encoding: ", encode, call.=FALSE)
 
     headers <- add_cognitive_auth(endpoint, headers)
     verb <- match.arg(http_verb)
