@@ -20,7 +20,7 @@ call_cognitive_endpoint(endpoint, operation, options = list(),
 
 \item{body}{The body of the HTTP request for the REST call.}
 
-\item{encode}{The encoding (really content-type) for the body. Can be \code{json} if the body is JSON text, or \code{raw} for a binary object. If \code{encode == "raw"}, you must also set the content-type header manually (see examples below).}
+\item{encode}{The encoding (really content-type) for the body. Can be \code{json} if the body is JSON text, or \code{raw} for a binary object.}
 
 \item{http_verb}{The HTTP verb for the REST call.}
 
@@ -55,7 +55,6 @@ call_cognitive_endpoint(endp,
     operation="analyze",
     body=img_raw,
     encode="raw",
-    headers=list(`content-type`="application/octet-stream"),
     http_verb="POST")
 
 }
