@@ -68,7 +68,7 @@ print.cognitive_endpoint <- function(x, ...)
 #' @param options Any query parameters that the operation takes.
 #' @param headers Any optional HTTP headers to include in the REST call. Note that `call_cognitive_endpoint` will handle authentication details automatically, so don't include them here.
 #' @param body The body of the HTTP request for the REST call.
-#' @param encode The encoding (really content-type) for the body. Can be `json` if the body is JSON text, or `raw` for a binary object. If `encode == "raw"`, you must also set the content-type header manually (see examples below).
+#' @param encode The encoding (really content-type) for the body. Can be `json` if the body is JSON text, or `raw` for a binary object.
 #' @param http_verb The HTTP verb for the REST call.
 #' @param http_status_handler How to handle a failed REST call. `stop`, `warn` and `message` will call the corresponding `*_for_status` handler in the httr package; `pass` will return the raw response object unchanged. The last one is mostly intended for debugging purposes.
 #' @details
@@ -99,7 +99,6 @@ print.cognitive_endpoint <- function(x, ...)
 #'     operation="analyze",
 #'     body=img_raw,
 #'     encode="raw",
-#'     headers=list(`content-type`="application/octet-stream"),
 #'     http_verb="POST")
 #'
 #' }
