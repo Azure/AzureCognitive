@@ -84,6 +84,10 @@ add_methods <- function()
         if(!is.null(subdomain))
             properties <- utils::modifyList(properties, list(customSubDomainName=subdomain))
 
+        # resource deployment fails if properties is {}
+        if(is_empty(properties))
+            properties <- NULL
+
         az_cognitive_service$new(self$token, self$subscription, self$name,
             type="Microsoft.CognitiveServices/accounts",
             name=name,

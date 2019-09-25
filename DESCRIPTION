@@ -12,7 +12,7 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 3.3)
 Imports:
-    AzureAuth,
+    AzureAuth (>= 1.2.0),
     AzureRMR,
     jsonlite,
     httr (>= 1.3),

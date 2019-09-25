@@ -141,6 +141,8 @@ add_cognitive_auth <- function(endpoint, headers)
             token$refresh()
         c(headers, Authorization=paste("Bearer", AzureAuth::extract_jwt(token)))
     }
+    else if(!is_empty(endpoint$cognitive_token))
+        c(headers, Authorization=paste("Bearer", endpoint$cognitive_token))
     else stop("No supported authentication method found", call.=FALSE)
 
     do.call(httr::add_headers, headers)
@@ -192,7 +194,7 @@ get_api_path <- function(type)
         customvision=, customvision_training=, customvision_prediction="customvision/v3.0",
         contentmoderator="contentmoderator/moderate/v1.0",
         text="text/analytics/v2.0",
-        texttranslate="translate",
+        texttranslation="translate",
         stop("Unknown cognitive service", call.=FALSE)
     )
 }
