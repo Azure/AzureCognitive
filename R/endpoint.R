@@ -168,10 +168,10 @@ cognitive_error_message <- function(cont)
 {
     if(is.raw(cont))
         cont <- jsonlite::fromJSON(rawToChar(cont))
+    else if(is.character(cont))
+        cont <- jsonlite::fromJSON(cont)
 
-    msg <- if(is.character(cont))
-        cont
-    else if(is.list(cont))
+    msg <- if(is.list(cont))
     {
         if(is.character(cont$message))
             cont$message
