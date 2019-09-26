@@ -104,7 +104,7 @@ print.cognitive_endpoint <- function(x, ...)
 #'
 #' }
 #' @export
-call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers=list(), body=NULL, encode="json",
+call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers=list(), body=NULL, encode=NULL,
                                     http_verb=c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
                                     http_status_handler=c("stop", "warn", "message", "pass"))
 {
@@ -112,7 +112,21 @@ call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers
     url$path <- file.path(url$path, operation)
     url$query <- options
 
-    if(encode == "json")
+    if(is.null(encode)) # auto-detect from body
+    {
+        if(is.raw(body))
+        {
+            encode <- "raw"
+            headers$`content-type` <- "application/octet-stream"
+        }
+        else if(!is.null(body))
+        {
+            body <- jsonlite::toJSON(body, auto_unbox=TRUE, digits=22, null="null")
+            encode <- "raw"
+            headers$`content-type` <- "application/json"
+        }
+    }
+    else if(encode == "json")
     {
         # manually convert to json to avoid issues with nulls
         body <- jsonlite::toJSON(body, auto_unbox=TRUE, digits=22, null="null")
