@@ -37,6 +37,7 @@ globalVariables(c("self", "private"))
 #' These are methods to create, get or delete a cognitive service resource within a resource group.
 #'
 #' For `create_cognitive_service`, the type of service created can be one of the following:
+#' - `CognitiveServices`: multiple service types
 #' - `ComputerVision`: generic computer vision service
 #' - `Face`: face recognition
 #' - `LUIS`: language understanding

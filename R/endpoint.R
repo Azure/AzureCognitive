@@ -7,6 +7,7 @@
 #' @param cognitive_token A Cognitive Service token, as another alternative to a key for the services that accept it.
 #' @details
 #' Currently, `cognitive_endpoint` recognises the following service types:
+#' - `CognitiveServices`: multiple service types
 #' - `ComputerVision`: generic computer vision service
 #' - `Face`: face recognition
 #' - `LUIS`: language understanding
@@ -194,7 +195,7 @@ get_api_path <- function(type)
         customvision=, customvision_training=, customvision_prediction="customvision/v3.0",
         contentmoderator="contentmoderator/moderate/v1.0",
         text="text/analytics/v2.0",
-        texttranslation="translate",
+        cognitiveservices=, texttranslation="",
         stop("Unknown cognitive service", call.=FALSE)
     )
 }
