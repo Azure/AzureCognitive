@@ -173,7 +173,10 @@ process_cognitive_response <- function(response, handler)
         handler(response, paste0("complete Cognitive Services operation. Message:\n",
                                  sub("\\.$", "", cognitive_error_message(cont))))
 
-        cont
+        # only return parsed content if json
+        if(grepl("json", httr::headers(response)$`content-type`))
+            cont
+        else response$content
     }
     else response
 }
