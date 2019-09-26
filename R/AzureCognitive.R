@@ -89,7 +89,7 @@ add_methods <- function()
         if(is_empty(properties))
             properties <- NULL
 
-        az_cognitive_service$new(self$token, self$subscription, self$name,
+        AzureCognitive::az_cognitive_service$new(self$token, self$subscription, self$name,
             type="Microsoft.CognitiveServices/accounts",
             name=name,
             location=location,
@@ -102,7 +102,7 @@ add_methods <- function()
     az_resource_group$set("public", "get_cognitive_service", overwrite=TRUE,
     function(name)
     {
-        az_cognitive_service$new(self$token, self$subscription, self$name,
+        AzureCognitive::az_cognitive_service$new(self$token, self$subscription, self$name,
             type="Microsoft.CognitiveServices/accounts",
             name=name)
     })
@@ -110,7 +110,7 @@ add_methods <- function()
     az_resource_group$set("public", "delete_cognitive_service", overwrite=TRUE,
     function(name, confirm=TRUE, wait=FALSE)
     {
-        az_cognitive_service$new(self$token, self$subscription, self$name,
+        AzureCognitive::az_cognitive_service$new(self$token, self$subscription, self$name,
             type="Microsoft.CognitiveServices/accounts",
             name=name,
             deployed_properties=list(NULL))$delete(confirm=confirm, wait=wait)
