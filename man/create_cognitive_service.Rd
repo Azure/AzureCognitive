@@ -36,6 +36,7 @@ These are methods to create, get or delete a cognitive service resource within a
 
 For \code{create_cognitive_service}, the type of service created can be one of the following:
 \itemize{
+\item \code{CognitiveServices}: multiple service types
 \item \code{ComputerVision}: generic computer vision service
 \item \code{Face}: face recognition
 \item \code{LUIS}: language understanding

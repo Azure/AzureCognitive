@@ -27,6 +27,7 @@ Object representing an Azure Cognitive Service endpoint
 \details{
 Currently, \code{cognitive_endpoint} recognises the following service types:
 \itemize{
+\item \code{CognitiveServices}: multiple service types
 \item \code{ComputerVision}: generic computer vision service
 \item \code{Face}: face recognition
 \item \code{LUIS}: language understanding

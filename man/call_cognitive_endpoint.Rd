@@ -5,7 +5,7 @@
 \title{Call a Cognitive Service REST endpoint}
 \usage{
 call_cognitive_endpoint(endpoint, operation, options = list(),
-  headers = list(), body = NULL, encode = "json",
+  headers = list(), body = NULL, encode = NULL,
   http_verb = c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
   http_status_handler = c("stop", "warn", "message", "pass"))
 }
