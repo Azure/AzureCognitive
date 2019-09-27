@@ -12,11 +12,13 @@ cognitive_endpoint(url, service_type, key = NULL, aad_token = NULL,
 
 \item{service_type}{What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.}
 
-\item{key}{The key to use to authenticate with the endpoint.}
+\item{key}{The subscription key to use to authenticate with the endpoint.}
 
 \item{aad_token}{An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.}
 
 \item{cognitive_token}{A Cognitive Service token, as another alternative to a key for the services that accept it.}
+
+\item{auth_header}{The name of the HTTP request header for authentication. Only used if a subscription key is supplied.}
 }
 \value{
 An object of from class \code{cognitive_endpoint}, that can be used to communicate with the REST endpoint.

@@ -2,9 +2,10 @@
 #'
 #' @param url The URL of the endpoint.
 #' @param service_type What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.
-#' @param key The key to use to authenticate with the endpoint.
+#' @param key The subscription key to use to authenticate with the endpoint.
 #' @param aad_token An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.
 #' @param cognitive_token A Cognitive Service token, as another alternative to a key for the services that accept it.
+#' @param auth_header The name of the HTTP request header for authentication. Only used if a subscription key is supplied.
 #' @details
 #' Currently, `cognitive_endpoint` recognises the following service types:
 #' - `CognitiveServices`: multiple service types
