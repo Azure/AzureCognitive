@@ -5,7 +5,6 @@
 #' @param key The subscription key to use to authenticate with the endpoint.
 #' @param aad_token An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.
 #' @param cognitive_token A Cognitive Service token, as another alternative to a key for the services that accept it.
-#' @param auth_header The name of the HTTP request header for authentication. Only used if a subscription key is supplied.
 #' @details
 #' Currently, `cognitive_endpoint` recognises the following service types:
 #' - `CognitiveServices`: multiple service types
@@ -73,6 +72,7 @@ print.cognitive_endpoint <- function(x, ...)
 #' @param encode The encoding (really content-type) for the body. Can be `json` if the body is JSON text, or `raw` for a binary object.
 #' @param http_verb The HTTP verb for the REST call.
 #' @param http_status_handler How to handle a failed REST call. `stop`, `warn` and `message` will call the corresponding `*_for_status` handler in the httr package; `pass` will return the raw response object unchanged. The last one is mostly intended for debugging purposes.
+#' @param auth_header The name of the HTTP request header for authentication. Only used if a subscription key is supplied.
 #' @details
 #' This function does the low-level work of constructing a HTTP request and then calling the REST endpoint. It is meant to be used by other packages that provide higher-level views of the service functionality.
 #'
