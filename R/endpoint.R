@@ -106,7 +106,8 @@ print.cognitive_endpoint <- function(x, ...)
 #' @export
 call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers=list(), body=NULL, encode=NULL,
                                     http_verb=c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
-                                    http_status_handler=c("stop", "warn", "message", "pass"))
+                                    http_status_handler=c("stop", "warn", "message", "pass"),
+                                    auth_header="ocp-apim-subscription-key")
 {
     url <- endpoint$url
     url$path <- file.path(url$path, operation)
@@ -137,7 +138,7 @@ call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers
         headers$`content-type` <- "application/octet-stream"
     else stop("Unsupported encoding: ", encode, call.=FALSE)
 
-    headers <- add_cognitive_auth(endpoint, headers)
+    headers <- add_cognitive_auth(endpoint, headers, auth_header)
     verb <- match.arg(http_verb)
     res <- httr::VERB(verb, url, headers, body=body, encode=encode)
 
@@ -145,19 +146,19 @@ call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers
 }
 
 
-add_cognitive_auth <- function(endpoint, headers)
+add_cognitive_auth <- function(endpoint, headers, auth_header)
 {
-    headers <- if(!is.null(endpoint$key))
-        c(headers, `Ocp-Apim-Subscription-Key`=unname(endpoint$key))
+    if(!is.null(endpoint$key))
+        headers[[auth_header]] <- unname(endpoint$key)
     else if(is_azure_token(endpoint$aad_token))
     {
         token <- endpoint$aad_token
         if(!token$validate())
             token$refresh()
-        c(headers, Authorization=paste("Bearer", AzureAuth::extract_jwt(token)))
+        headers[["Authorization"]] <- paste("Bearer", AzureAuth::extract_jwt(token))
     }
     else if(!is_empty(endpoint$cognitive_token))
-        c(headers, Authorization=paste("Bearer", endpoint$cognitive_token))
+        headers[["Authorization"]] <- paste("Bearer", endpoint$cognitive_token)
     else stop("No supported authentication method found", call.=FALSE)
 
     do.call(httr::add_headers, headers)
