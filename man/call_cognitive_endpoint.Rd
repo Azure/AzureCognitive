@@ -7,7 +7,8 @@
 call_cognitive_endpoint(endpoint, operation, options = list(),
   headers = list(), body = NULL, encode = NULL,
   http_verb = c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
-  http_status_handler = c("stop", "warn", "message", "pass"))
+  http_status_handler = c("stop", "warn", "message", "pass"),
+  auth_header = "ocp-apim-subscription-key")
 }
 \arguments{
 \item{endpoint}{An object of class \code{cognitive_endpoint}.}
