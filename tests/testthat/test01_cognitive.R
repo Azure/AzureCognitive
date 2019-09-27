@@ -25,6 +25,9 @@ test_that("Resource creation works",
     expect_is(cogsvc, "az_cognitive_service")
 
     cogsvc$add_role_assignment(svc_principal, "cognitive services user")
+
+    # wait for Azure to catch up
+    Sys.sleep(5)
 })
 
 test_that("Resource methods work",

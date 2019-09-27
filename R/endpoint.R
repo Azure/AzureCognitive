@@ -151,10 +151,10 @@ add_cognitive_auth <- function(endpoint, headers, auth_header)
 {
     if(!is.null(endpoint$key))
         headers[[auth_header]] <- unname(endpoint$key)
-    else if(is_azure_token(endpoint$aad_token))
+    else if(!is.null(endpoint$aad_token))
     {
         token <- endpoint$aad_token
-        if(!token$validate())
+        if(inherits(token, c("AzureToken", "Token")) && !token$validate())
             token$refresh()
         headers[["Authorization"]] <- paste("Bearer", AzureAuth::extract_jwt(token))
     }
