@@ -18,7 +18,7 @@
 #' - `TextTranslate`: text translation
 #'
 #' @return
-#' An object of from class `cognitive_endpoint`, that can be used to communicate with the REST endpoint.
+#' An object inheriting from class `cognitive_endpoint`, that can be used to communicate with the REST endpoint. The subclass of the object indicates the type of service provided.
 #'
 #' @seealso
 #' [call_cognitive_endpoint], [create_cognitive_service], [get_cognitive_service]
@@ -46,7 +46,7 @@ cognitive_endpoint <- function(url, service_type, key=NULL, aad_token=NULL, cogn
     url$path <- get_api_path(service_type)
 
     object <- list(url=url, key=unname(key), aad_token=aad_token, cognitive_token=cognitive_token)
-    class(object) <- "cognitive_endpoint"
+    class(object) <- c(paste0(service_type, "_endpoint"), "cognitive_endpoint")
 
     object
 }

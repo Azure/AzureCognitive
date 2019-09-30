@@ -19,7 +19,7 @@ cognitive_endpoint(url, service_type, key = NULL, aad_token = NULL,
 \item{cognitive_token}{A Cognitive Service token, as another alternative to a key for the services that accept it.}
 }
 \value{
-An object of from class \code{cognitive_endpoint}, that can be used to communicate with the REST endpoint.
+An object inheriting from class \code{cognitive_endpoint}, that can be used to communicate with the REST endpoint. The subclass of the object indicates the type of service provided.
 }
 \description{
 Object representing an Azure Cognitive Service endpoint
