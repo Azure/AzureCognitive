@@ -2,16 +2,21 @@
 % Please edit documentation in R/endpoint.R
 \name{call_cognitive_endpoint}
 \alias{call_cognitive_endpoint}
+\alias{call_cognitive_endpoint.cognitive_endpoint}
 \title{Call a Cognitive Service REST endpoint}
 \usage{
-call_cognitive_endpoint(endpoint, operation, options = list(),
-  headers = list(), body = NULL, encode = NULL,
-  http_verb = c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
+call_cognitive_endpoint(endpoint, ...)
+
+\method{call_cognitive_endpoint}{cognitive_endpoint}(endpoint, operation,
+  options = list(), headers = list(), body = NULL, encode = NULL,
+  ..., http_verb = c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
   http_status_handler = c("stop", "warn", "message", "pass"),
   auth_header = "ocp-apim-subscription-key")
 }
 \arguments{
 \item{endpoint}{An object of class \code{cognitive_endpoint}.}
+
+\item{...}{Further arguments passed to lower-level functions.}
 
 \item{operation}{The operation to perform.}
 

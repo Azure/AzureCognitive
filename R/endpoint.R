@@ -73,6 +73,7 @@ print.cognitive_endpoint <- function(x, ...)
 #' @param http_verb The HTTP verb for the REST call.
 #' @param http_status_handler How to handle a failed REST call. `stop`, `warn` and `message` will call the corresponding `*_for_status` handler in the httr package; `pass` will return the raw response object unchanged. The last one is mostly intended for debugging purposes.
 #' @param auth_header The name of the HTTP request header for authentication. Only used if a subscription key is supplied.
+#' @param ... Further arguments passed to lower-level functions.
 #' @details
 #' This function does the low-level work of constructing a HTTP request and then calling the REST endpoint. It is meant to be used by other packages that provide higher-level views of the service functionality.
 #'
@@ -105,10 +106,18 @@ print.cognitive_endpoint <- function(x, ...)
 #'
 #' }
 #' @export
-call_cognitive_endpoint <- function(endpoint, operation, options=list(), headers=list(), body=NULL, encode=NULL,
-                                    http_verb=c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
-                                    http_status_handler=c("stop", "warn", "message", "pass"),
-                                    auth_header="ocp-apim-subscription-key")
+call_cognitive_endpoint <- function(endpoint, ...)
+{
+    UseMethod("call_cognitive_endpoint")
+}
+
+#' @rdname call_cognitive_endpoint
+#' @export
+call_cognitive_endpoint.cognitive_endpoint <- function(endpoint, operation,
+    options=list(), headers=list(), body=NULL, encode=NULL, ...,
+    http_verb=c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
+    http_status_handler=c("stop", "warn", "message", "pass"),
+    auth_header="ocp-apim-subscription-key")
 {
     url <- endpoint$url
     url$path <- file.path(url$path, operation)
