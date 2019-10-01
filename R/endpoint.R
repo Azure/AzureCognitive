@@ -185,7 +185,7 @@ process_cognitive_response <- function(response, handler)
                                  sub("\\.$", "", cognitive_error_message(cont))))
 
         # only return parsed content if json
-        if(grepl("json", httr::headers(response)$`content-type`))
+        if(is_json_content(httr::headers(response)))
             cont
         else response$content
     }
@@ -233,3 +233,11 @@ normalize_cognitive_type <- function(type)
 {
     tolower(gsub("[. ]", "_", type))
 }
+
+
+is_json_content <- function(headers)
+{
+    cont_type <- which(tolower(names(headers)) == "content-type")
+    !is_empty(cont_type) && grepl("json", tolower(headers[[cont_type]]))
+}
+
