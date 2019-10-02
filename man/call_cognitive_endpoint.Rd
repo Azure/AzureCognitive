@@ -16,7 +16,7 @@ call_cognitive_endpoint(endpoint, ...)
 \arguments{
 \item{endpoint}{An object of class \code{cognitive_endpoint}.}
 
-\item{...}{Further arguments passed to lower-level functions.}
+\item{...}{Further arguments passed to \code{httr::content}. In particular, this can be used to convert structured JSON content into a data frame by passing \code{simplifyDataFrame=TRUE}.}
 
 \item{operation}{The operation to perform.}
 

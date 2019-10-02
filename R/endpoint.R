@@ -73,7 +73,7 @@ print.cognitive_endpoint <- function(x, ...)
 #' @param http_verb The HTTP verb for the REST call.
 #' @param http_status_handler How to handle a failed REST call. `stop`, `warn` and `message` will call the corresponding `*_for_status` handler in the httr package; `pass` will return the raw response object unchanged. The last one is mostly intended for debugging purposes.
 #' @param auth_header The name of the HTTP request header for authentication. Only used if a subscription key is supplied.
-#' @param ... Further arguments passed to lower-level functions.
+#' @param ... Further arguments passed to `httr::content`. In particular, this can be used to convert structured JSON content into a data frame by passing `simplifyDataFrame=TRUE`.
 #' @details
 #' This function does the low-level work of constructing a HTTP request and then calling the REST endpoint. It is meant to be used by other packages that provide higher-level views of the service functionality.
 #'
@@ -152,7 +152,7 @@ call_cognitive_endpoint.cognitive_endpoint <- function(endpoint, operation,
     verb <- match.arg(http_verb)
     res <- httr::VERB(verb, url, headers, body=body, encode=encode)
 
-    process_cognitive_response(res, match.arg(http_status_handler))
+    process_cognitive_response(res, match.arg(http_status_handler), ...)
 }
 
 
@@ -175,18 +175,17 @@ add_cognitive_auth <- function(endpoint, headers, auth_header)
 }
 
 
-process_cognitive_response <- function(response, handler)
+process_cognitive_response <- function(response, handler, ...)
 {
     if(handler != "pass")
     {
-        cont <- httr::content(response)
         handler <- get(paste0(handler, "_for_status"), getNamespace("httr"))
         handler(response, paste0("complete Cognitive Services operation. Message:\n",
-                                 sub("\\.$", "", cognitive_error_message(cont))))
+                                 sub("\\.$", "", cognitive_error_message(httr::content(response)))))
 
         # only return parsed content if json
         if(is_json_content(httr::headers(response)))
-            cont
+            httr::content(response, ...)
         else response$content
     }
     else response
