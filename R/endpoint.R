@@ -179,14 +179,13 @@ process_cognitive_response <- function(response, handler)
 {
     if(handler != "pass")
     {
-        cont <- httr::content(response)
         handler <- get(paste0(handler, "_for_status"), getNamespace("httr"))
         handler(response, paste0("complete Cognitive Services operation. Message:\n",
-                                 sub("\\.$", "", cognitive_error_message(cont))))
+                                 sub("\\.$", "", cognitive_error_message(httr::content(response)))))
 
         # only return parsed content if json
         if(is_json_content(httr::headers(response)))
-            cont
+            httr::content(response, simplifyVector=TRUE)
         else response$content
     }
     else response
