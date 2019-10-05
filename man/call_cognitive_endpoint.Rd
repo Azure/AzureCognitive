@@ -16,7 +16,7 @@ call_cognitive_endpoint(endpoint, ...)
 \arguments{
 \item{endpoint}{An object of class \code{cognitive_endpoint}.}
 
-\item{...}{Further arguments passed to \code{httr::content}. In particular, this can be used to convert structured JSON content into a data frame by passing \code{simplifyDataFrame=TRUE}.}
+\item{...}{Further arguments passed to lower-level functions. For the default method, these are passed to \code{\link[httr:content]{httr::content}}; in particular, you can convert a structured JSON response into a data frame by specifying \code{simplifyDataFrame=TRUE}.}
 
 \item{operation}{The operation to perform.}
 
@@ -26,7 +26,7 @@ call_cognitive_endpoint(endpoint, ...)
 
 \item{body}{The body of the HTTP request for the REST call.}
 
-\item{encode}{The encoding (really content-type) for the body. Can be \code{json} if the body is JSON text, or \code{raw} for a binary object.}
+\item{encode}{The encoding (really content-type) for the body. See the \code{encode} argument for \code{\link[httr:POST]{httr::POST}}. The default value of NULL will use \code{raw} encoding if the body is a raw vector, and \code{json} encoding for anything else.}
 
 \item{http_verb}{The HTTP verb for the REST call.}
 

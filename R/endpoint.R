@@ -56,7 +56,7 @@ cognitive_endpoint <- function(url, service_type, key=NULL, aad_token=NULL, cogn
 print.cognitive_endpoint <- function(x, ...)
 {
     cat("Azure Cognitive Service endpoint\n")
-    cat("Service type:", sub("_.*$", "", class(x)[1]), "\n")
+    cat("Service type:", class(x)[1], "\n")
     cat("Endpoint URL:", httr::build_url(x$url), "\n")
     invisible(x)
 }
@@ -69,11 +69,11 @@ print.cognitive_endpoint <- function(x, ...)
 #' @param options Any query parameters that the operation takes.
 #' @param headers Any optional HTTP headers to include in the REST call. Note that `call_cognitive_endpoint` will handle authentication details automatically, so don't include them here.
 #' @param body The body of the HTTP request for the REST call.
-#' @param encode The encoding (really content-type) for the body. Can be `json` if the body is JSON text, or `raw` for a binary object.
+#' @param encode The encoding (really content-type) for the body. See the `encode` argument for [`httr::POST`]. The default value of NULL will use `raw` encoding if the body is a raw vector, and `json` encoding for anything else.
 #' @param http_verb The HTTP verb for the REST call.
 #' @param http_status_handler How to handle a failed REST call. `stop`, `warn` and `message` will call the corresponding `*_for_status` handler in the httr package; `pass` will return the raw response object unchanged. The last one is mostly intended for debugging purposes.
 #' @param auth_header The name of the HTTP request header for authentication. Only used if a subscription key is supplied.
-#' @param ... Further arguments passed to `httr::content`. In particular, this can be used to convert structured JSON content into a data frame by passing `simplifyDataFrame=TRUE`.
+#' @param ... Further arguments passed to lower-level functions. For the default method, these are passed to [`httr::content`]; in particular, you can convert a structured JSON response into a data frame by specifying `simplifyDataFrame=TRUE`.
 #' @details
 #' This function does the low-level work of constructing a HTTP request and then calling the REST endpoint. It is meant to be used by other packages that provide higher-level views of the service functionality.
 #'
@@ -144,9 +144,8 @@ call_cognitive_endpoint.cognitive_endpoint <- function(endpoint, operation,
         encode <- "raw"
         headers$`content-type` <- "application/json"
     }
-    else if(encode == "raw")
+    else if(encode == "raw" && is.null(headers$`content-type`))
         headers$`content-type` <- "application/octet-stream"
-    else stop("Unsupported encoding: ", encode, call.=FALSE)
 
     headers <- add_cognitive_auth(endpoint, headers, auth_header)
     verb <- match.arg(http_verb)
