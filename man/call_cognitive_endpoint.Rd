@@ -10,8 +10,7 @@ call_cognitive_endpoint(endpoint, ...)
 \method{call_cognitive_endpoint}{cognitive_endpoint}(endpoint, operation,
   options = list(), headers = list(), body = NULL, encode = NULL,
   ..., http_verb = c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
-  http_status_handler = c("stop", "warn", "message", "pass"),
-  auth_header = "ocp-apim-subscription-key")
+  http_status_handler = c("stop", "warn", "message", "pass"))
 }
 \arguments{
 \item{endpoint}{An object of class \code{cognitive_endpoint}.}
@@ -31,8 +30,6 @@ call_cognitive_endpoint(endpoint, ...)
 \item{http_verb}{The HTTP verb for the REST call.}
 
 \item{http_status_handler}{How to handle a failed REST call. \code{stop}, \code{warn} and \code{message} will call the corresponding \code{*_for_status} handler in the httr package; \code{pass} will return the raw response object unchanged. The last one is mostly intended for debugging purposes.}
-
-\item{auth_header}{The name of the HTTP request header for authentication. Only used if a subscription key is supplied.}
 }
 \value{
 For a successful REST call, the contents of the response. This will usually be a list, obtained by translating the raw JSON body into R. If the call returns a non-success HTTP status code, based on the \code{http_status_handler} argument.

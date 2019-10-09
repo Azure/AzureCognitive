@@ -2,9 +2,10 @@
 #'
 #' @param url The URL of the endpoint.
 #' @param service_type What type (or kind) of service the endpoint provides. See below for the services that AzureCognitive currently recognises.
-#' @param key The subscription key to use to authenticate with the endpoint.
+#' @param key The subscription key (single- or multi-service) to use to authenticate with the endpoint.
 #' @param aad_token An Azure Active Directory (AAD) OAuth token, as an alternative to a key for the services that allow AAD authentication.
 #' @param cognitive_token A Cognitive Service token, as another alternative to a key for the services that accept it.
+#' @param auth_header The name of the HTTP request header for authentication. Only used if a subscription key is supplied.
 #' @details
 #' Currently, `cognitive_endpoint` recognises the following service types:
 #' - `CognitiveServices`: multiple service types
@@ -39,13 +40,20 @@
 #'
 #' }
 #' @export
-cognitive_endpoint <- function(url, service_type, key=NULL, aad_token=NULL, cognitive_token=NULL)
+cognitive_endpoint <- function(url, service_type, key=NULL, aad_token=NULL, cognitive_token=NULL,
+                               auth_header="ocp-apim-subscription-key")
 {
     service_type <- normalize_cognitive_type(service_type)
     url <- httr::parse_url(url)
     url$path <- get_api_path(service_type)
 
-    object <- list(url=url, key=unname(key), aad_token=aad_token, cognitive_token=cognitive_token)
+    object <- list(
+        url=url,
+        key=unname(key),
+        aad_token=aad_token,
+        cognitive_token=cognitive_token,
+        auth_header=auth_header
+    )
     class(object) <- c(paste0(service_type, "_endpoint"), "cognitive_endpoint")
 
     object
@@ -72,7 +80,6 @@ print.cognitive_endpoint <- function(x, ...)
 #' @param encode The encoding (really content-type) for the body. See the `encode` argument for [`httr::POST`]. The default value of NULL will use `raw` encoding if the body is a raw vector, and `json` encoding for anything else.
 #' @param http_verb The HTTP verb for the REST call.
 #' @param http_status_handler How to handle a failed REST call. `stop`, `warn` and `message` will call the corresponding `*_for_status` handler in the httr package; `pass` will return the raw response object unchanged. The last one is mostly intended for debugging purposes.
-#' @param auth_header The name of the HTTP request header for authentication. Only used if a subscription key is supplied.
 #' @param ... Further arguments passed to lower-level functions. For the default method, these are passed to [`httr::content`]; in particular, you can convert a structured JSON response into a data frame by specifying `simplifyDataFrame=TRUE`.
 #' @details
 #' This function does the low-level work of constructing a HTTP request and then calling the REST endpoint. It is meant to be used by other packages that provide higher-level views of the service functionality.
@@ -116,8 +123,7 @@ call_cognitive_endpoint <- function(endpoint, ...)
 call_cognitive_endpoint.cognitive_endpoint <- function(endpoint, operation,
     options=list(), headers=list(), body=NULL, encode=NULL, ...,
     http_verb=c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
-    http_status_handler=c("stop", "warn", "message", "pass"),
-    auth_header="ocp-apim-subscription-key")
+    http_status_handler=c("stop", "warn", "message", "pass"))
 {
     url <- endpoint$url
     url$path <- file.path(url$path, operation)
@@ -147,7 +153,7 @@ call_cognitive_endpoint.cognitive_endpoint <- function(endpoint, operation,
     else if(encode == "raw" && is.null(headers$`content-type`))
         headers$`content-type` <- "application/octet-stream"
 
-    headers <- add_cognitive_auth(endpoint, headers, auth_header)
+    headers <- add_cognitive_auth(endpoint, headers)
     verb <- match.arg(http_verb)
     res <- httr::VERB(verb, url, headers, body=body, encode=encode)
 
@@ -158,7 +164,7 @@ call_cognitive_endpoint.cognitive_endpoint <- function(endpoint, operation,
 add_cognitive_auth <- function(endpoint, headers, auth_header)
 {
     if(!is.null(endpoint$key))
-        headers[[auth_header]] <- unname(endpoint$key)
+        headers[[endpoint$auth_header]] <- unname(endpoint$key)
     else if(!is.null(endpoint$aad_token))
     {
         token <- endpoint$aad_token
