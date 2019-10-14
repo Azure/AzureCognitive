@@ -1,4 +1,4 @@
-# AzureCognitive
+# AzureCognitive <img src="man/figures/logo.png" align="right" width=150 />
 
 [![Build Status](https://asiadatascience.visualstudio.com/AzureR/_apis/build/status/Azure.AzureCognitive?branchName=master)](https://asiadatascience.visualstudio.com/AzureR/_build/latest?definitionId=12&branchName=master)
 
