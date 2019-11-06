@@ -1,11 +1,11 @@
 Package: AzureCognitive
 Title: Interface to Azure Cognitive Services
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person("Hong", "Ooi", , "hongooi@microsoft.com", role = c("aut", "cre")),
     person("Microsoft", role="cph")
     )
-Description: An interface to the Azure Cognitive Services REST API.
+Description: An interface to the Azure Cognitive Services REST API. Both an 'Azure Resource Manager' interface, for deploying Cognitive Services resources, and a client framework are supplied. While 'AzureCognitive' can be called by the end-user, it is meant to provide a foundation for other packages that will support specific services, like Computer Vision, Custom Vision, language translation, and so on.
 URL: https://github.com/Azure/AzureCognitive https://github.com/Azure/AzureR
 BugReports: https://github.com/Azure/AzureCognitive/issues
 License: MIT + file LICENSE

@@ -1,5 +1,7 @@
 # AzureCognitive <img src="man/figures/logo.png" align="right" width=150 />
 
+[![CRAN](https://www.r-pkg.org/badges/version/AzureCognitive)](https://cran.r-project.org/package=AzureCognitive)
+![Downloads](https://cranlogs.r-pkg.org/badges/AzureCognitive)
 [![Build Status](https://asiadatascience.visualstudio.com/AzureR/_apis/build/status/Azure.AzureCognitive?branchName=master)](https://asiadatascience.visualstudio.com/AzureR/_build/latest?definitionId=12&branchName=master)
 
 A package to work with [Azure Cognitive Services](https://azure.microsoft.com/services/cognitive-services/). Both a Resource Manager interface and a client interface to the REST API are provided.
