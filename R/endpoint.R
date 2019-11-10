@@ -36,7 +36,7 @@
 #' token <- AzureAuth::get_azure_token("https://cognitiveservices.azure.com",
 #'     tenant="mytenant", app="app_id", password="password")
 #' cognitive_service("https://myvisionservice.api.cognitive.azure.com",
-#'     service_type="Computervision", aad_token=token))
+#'     service_type="Computervision", aad_token=token)
 #'
 #' }
 #' @export
