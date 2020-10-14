@@ -4,10 +4,6 @@
 \name{az_cognitive_service}
 \alias{az_cognitive_service}
 \title{Azure Cognitive Service resource class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-az_cognitive_service
-}
 \description{
 Class representing a cognitive service resource, exposing methods for working with it.
 }
@@ -52,4 +48,3 @@ cogsvc$get_endpoint()
 \seealso{
 \link{cognitive_endpoint}, \link{create_cognitive_service}, \link{get_cognitive_service}
 }
-\keyword{datasets}

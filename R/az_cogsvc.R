@@ -45,7 +45,7 @@ public=list(
 
     regen_key=function(key=1)
     {
-        body=list(keyName=paste0("Key", key))
+        body <- list(keyName=paste0("Key", key))
         unlist(private$res_op("regenerateKey", body=body, http_verb="POST"))
     },
 

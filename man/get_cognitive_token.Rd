@@ -4,14 +4,14 @@
 \alias{get_cognitive_token}
 \title{Obtain authentication token for a cognitive service}
 \usage{
-get_cognitive_token(key, region, token_host = NULL)
+get_cognitive_token(key, region = "global", token_url = NULL)
 }
 \arguments{
 \item{key}{The subscription key for the service.}
 
 \item{region}{The Azure region where the service is located.}
 
-\item{token_host}{Optionally, the URL for the token endpoint.}
+\item{token_url}{Optionally, the URL for the token endpoint.}
 }
 \description{
 Obtain authentication token for a cognitive service
