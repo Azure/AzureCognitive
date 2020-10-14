@@ -1,4 +1,4 @@
-# AzureCognitive 1.0.0.9000
+# AzureCognitive 1.0.1
 
 - Fix token authentication method for Text Translation (reported by @quickcoffee).
 - Change maintainer email address.
