@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEncoding{utf8}
 ---
 
-AzureCognitive is a package for working with [Azure Cognitive Services](https://azure.microsoft.com/services/cognitive-services/). Both a Resource Manager interface and a client interface to the Cognitive Services REST API are provided. The aim is to provide a foundation that can be built on by other packages that will support specific services (Computer Vision, LUIS, etc).
+AzureCognitive is a package for working with [Azure Cognitive Services](https://azure.microsoft.com/en-us/services/cognitive-services/). Both a Resource Manager interface and a client interface to the Cognitive Services REST API are provided. The aim is to provide a foundation that can be built on by other packages that will support specific services (Computer Vision, LUIS, etc).
 
 ## Resource Manager interface
 
