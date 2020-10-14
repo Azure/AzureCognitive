@@ -35,6 +35,7 @@ test_that("Endpoint cogsvc token authentication works",
     endp$url <- httr::parse_url("https://api.cognitive.microsofttranslator.com")
     res <- call_cognitive_endpoint(endp, "translate",
         options=list(`api-version`="3.0", from="en", to="de"),
+        headers=list(`Content-Length`=nchar("Hello world")),
         body=list(list(Text="Hello world")),
         http_verb="POST")
     expect_type(res, "list")

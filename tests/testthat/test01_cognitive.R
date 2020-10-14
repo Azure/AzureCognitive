@@ -68,6 +68,7 @@ test_that("Endpoint AAD authentication works",
     endp <- cognitive_endpoint(cogsvc$properties$endpoint, service_type="ComputerVision", aad_token=tok)
     expect_is(endp, "cognitive_endpoint")
 
+    Sys.sleep(30) # let AAD role assignment complete
     img_url <- httr::parse_url(storage)
     img_url$path <- "cognitive/bill.jpg"
     res <- call_cognitive_endpoint(endp, "analyze", body=list(url=httr::build_url(img_url)), http_verb="POST")
