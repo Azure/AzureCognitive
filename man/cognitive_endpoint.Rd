@@ -43,17 +43,17 @@ Currently, \code{cognitive_endpoint} recognises the following service types:
 \examples{
 \dontrun{
 
-cognitive_service("https://myvisionservice.api.cognitive.azure.com",
+cognitive_endpoint("https://myvisionservice.api.cognitive.azure.com",
     service_type="Computervision", key="key")
 
-cognitive_service("https://mylangservice.api.cognitive.azure.com",
+cognitive_endpoint("https://mylangservice.api.cognitive.azure.com",
     service_type="LUIS", key="key")
 
 # authenticating with AAD
 token <- AzureAuth::get_azure_token("https://cognitiveservices.azure.com",
     tenant="mytenant", app="app_id", password="password")
-cognitive_service("https://myvisionservice.api.cognitive.azure.com",
-    service_type="Computervision", aad_token=token))
+cognitive_endpoint("https://myvisionservice.api.cognitive.azure.com",
+    service_type="Computervision", aad_token=token)
 
 }
 }

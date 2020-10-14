@@ -8,8 +8,8 @@
 call_cognitive_endpoint(endpoint, ...)
 
 \method{call_cognitive_endpoint}{cognitive_endpoint}(endpoint, operation,
-  options = list(), headers = list(), body = NULL, encode = NULL,
-  ..., http_verb = c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
+  options = list(), headers = list(), body = NULL, encode = NULL, ...,
+  http_verb = c("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"),
   http_status_handler = c("stop", "warn", "message", "pass"))
 }
 \arguments{
@@ -29,7 +29,7 @@ call_cognitive_endpoint(endpoint, ...)
 
 \item{http_verb}{The HTTP verb for the REST call.}
 
-\item{http_status_handler}{How to handle a failed REST call. \code{stop}, \code{warn} and \code{message} will call the corresponding \code{*_for_status} handler in the httr package; \code{pass} will return the raw response object unchanged. The last one is mostly intended for debugging purposes.}
+\item{http_status_handler}{How to handle a failed REST call. \code{stop}, \code{warn} and \code{message} will call the corresponding \verb{*_for_status} handler in the httr package; \code{pass} will return the raw response object unchanged. The last one is mostly intended for debugging purposes.}
 }
 \value{
 For a successful REST call, the contents of the response. This will usually be a list, obtained by translating the raw JSON body into R. If the call returns a non-success HTTP status code, based on the \code{http_status_handler} argument.
@@ -43,7 +43,7 @@ This function does the low-level work of constructing a HTTP request and then ca
 \examples{
 \dontrun{
 
-endp <- cognitive_service("https://myvisionservice.api.cognitive.azure.com",
+endp <- cognitive_endpoint("https://myvisionservice.api.cognitive.azure.com",
     service_type="Computervision", key="key")
 
 # analyze an online image
