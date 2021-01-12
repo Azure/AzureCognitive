@@ -1,6 +1,6 @@
 Package: AzureCognitive
 Title: Interface to Azure Cognitive Services
-Version: 1.0.1
+Version: 1.0.1.9000
 Authors@R: c(
     person("Hong", "Ooi", , "hongooi73@gmail.com", role = c("aut", "cre")),
     person("Microsoft", role="cph")
