@@ -1,11 +1,11 @@
 Package: AzureCognitive
 Title: Interface to Azure Cognitive Services
-Version: 1.0.1.9000
+Version: 1.0.2
 Authors@R: c(
     person("Hong", "Ooi", , "hongooi73@gmail.com", role = c("aut", "cre")),
     person("Microsoft", role="cph")
     )
-Description: An interface to Azure Cognitive Services <https://docs.microsoft.com/en-us/azure/cognitive-services/>. Both an 'Azure Resource Manager' interface, for deploying Cognitive Services resources, and a client framework are supplied. While 'AzureCognitive' can be called by the end-user, it is meant to provide a foundation for other packages that will support specific services, like Computer Vision, Custom Vision, language translation, and so on. Part of the 'AzureR' family of packages.
+Description: An interface to Azure Cognitive Services <https://learn.microsoft.com/en-us/azure/cognitive-services/>. Both an 'Azure Resource Manager' interface, for deploying Cognitive Services resources, and a client framework are supplied. While 'AzureCognitive' can be called by the end-user, it is meant to provide a foundation for other packages that will support specific services, like Computer Vision, Custom Vision, language translation, and so on. Part of the 'AzureR' family of packages.
 URL: https://github.com/Azure/AzureCognitive https://github.com/Azure/AzureR
 BugReports: https://github.com/Azure/AzureCognitive/issues
 License: MIT + file LICENSE
@@ -22,4 +22,4 @@ Suggests:
     testthat
 VignetteBuilder: knitr
 Roxygen: list(markdown=TRUE, r6=FALSE, old_usage=TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1

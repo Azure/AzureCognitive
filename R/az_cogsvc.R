@@ -11,7 +11,7 @@
 #' - `list_service_tiers()`: List the service pricing tiers (SKUs) available for this service.
 #'
 #' @section Initialization:
-#' Initializing a new object of this class can either retrieve an existing service, or create a new service on the host. Generally, the best way to initialize an object is via the `get_cognitive_service` and `create_cognitive_service` methods of the [az_resource_group] class, which handle the details automatically.
+#' Initializing a new object of this class can either retrieve an existing service, or create a new service on the host. Generally, the best way to initialize an object is via the `get_cognitive_service` and `create_cognitive_service` methods of the [AzureRMR::az_resource_group] class, which handle the details automatically.
 #'
 #' @section Endpoints:
 #' The client-side interaction with a cognitive service is via an _endpoint_. Endpoint interaction in AzureCognitive is implemented using S3 classes. You can create a new endpoint object via the `get_endpoint()` method, or with the standalone `cognitive_endpoint()` function. If you use the latter, you will also have to supply any necessary authentication credentials, eg a subscription key or token.

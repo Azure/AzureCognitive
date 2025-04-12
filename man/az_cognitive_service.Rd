@@ -20,7 +20,7 @@ The following methods are available, in addition to those provided by the \link[
 
 \section{Initialization}{
 
-Initializing a new object of this class can either retrieve an existing service, or create a new service on the host. Generally, the best way to initialize an object is via the \code{get_cognitive_service} and \code{create_cognitive_service} methods of the \link{az_resource_group} class, which handle the details automatically.
+Initializing a new object of this class can either retrieve an existing service, or create a new service on the host. Generally, the best way to initialize an object is via the \code{get_cognitive_service} and \code{create_cognitive_service} methods of the \link[AzureRMR:az_resource_group]{AzureRMR::az_resource_group} class, which handle the details automatically.
 }
 
 \section{Endpoints}{

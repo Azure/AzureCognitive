@@ -55,8 +55,8 @@ globalVariables(c("self", "private"))
 #' @seealso
 #' [cognitive_endpoint], [call_cognitive_endpoint]
 #'
-#' [Azure Cognitive Services documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/),
-#' [REST API reference](https://docs.microsoft.com/en-us/rest/api/cognitiveservices/)
+#' [Azure Cognitive Services documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/),
+#' [REST API reference](https://learn.microsoft.com/en-us/rest/api/cognitiveservices/)
 #' @examples
 #' \dontrun{
 #'

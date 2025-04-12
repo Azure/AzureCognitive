@@ -9,11 +9,13 @@
 Methods for the \link[AzureRMR:az_resource_group]{AzureRMR::az_resource_group} class.
 }
 \section{Usage}{
-\preformatted{create_cognitive_service(name, service_type, service_tier, location = self$location,
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{create_cognitive_service(name, service_type, service_tier, location = self$location,
                          subdomain = name, properties = list(), ...)
 get_cognitive_service(name)
 delete_cognitive_service(name, confirm = TRUE, wait = FALSE)
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Arguments}{
@@ -77,6 +79,6 @@ rg$delete_cognitive_service("myvisionservice")
 \seealso{
 \link{cognitive_endpoint}, \link{call_cognitive_endpoint}
 
-\href{https://docs.microsoft.com/en-us/azure/cognitive-services/}{Azure Cognitive Services documentation},
-\href{https://docs.microsoft.com/en-us/rest/api/cognitiveservices/}{REST API reference}
+\href{https://learn.microsoft.com/en-us/azure/cognitive-services/}{Azure Cognitive Services documentation},
+\href{https://learn.microsoft.com/en-us/rest/api/cognitiveservices/}{REST API reference}
 }
